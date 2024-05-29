@@ -1,0 +1,75 @@
+### GET All patints
+
+GET http://localhost:8080/patient
+
+### GET patient by ID
+
+GET http://localhost:8080/patient/1
+
+### Create patient
+
+POST http://localhost:8080/patient
+Content-Type: application/json
+
+{
+  "firstName": "Charles",
+  "lastName": "Leclerc",
+  "dob": "2000-12-12",
+  "email": "clf1@gmail.com",
+  "phone": "+39087654388"
+}
+
+### search by name
+
+GET http://localhost:8080/patient/search?firstName=Char&lastName=L
+
+
+
+### GET All providers
+
+GET http://localhost:8080/provider
+
+### GET provider by ID
+
+GET http://localhost:8080/provider/28
+
+### Create provider
+
+POST http://localhost:8080/provider
+Content-Type: application/json
+
+{
+  "firstName": "Charles",
+  "lastName": "Leclerc",
+  "dob": "2000-12-12",
+  "email": "clf1@gmail.com",
+  "phone": "+39087654388",
+  "speciality": "surgeon"
+}
+
+
+### POST med rec
+POST http://localhost:8080/medicalRecord
+Content-Type: application/json
+
+{
+  "patientId": 32,
+  "providerId": 28,
+  "creationDate": "2024-05-27",
+  "medicalCode": "AA1",
+  "notes": "notesssss"
+}
+
+### GET All medRecord
+
+GET http://localhost:8080/medicalRecord/51
+
+
+
+
+
+
+
+
+
+

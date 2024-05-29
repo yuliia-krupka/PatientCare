@@ -1,0 +1,396 @@
+openapi: 3.0.1
+info:
+  title: Pcare API
+  description: API for managing patients, providers, and medical records
+  version: 1.0.0
+servers:
+  - url: /api
+
+paths:
+  /provider:
+    post:
+      summary: Create a new provider
+      tags:
+        - Provider
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Provider'
+      responses:
+        '200':
+          description: Provider created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Provider'
+    get:
+      summary: Get all patients
+      tags:
+        - Patient
+      responses:
+        '200':
+          description: A list of patients
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Patient'
+  /provider/{id}:
+    get:
+      summary: Get a provider by ID
+      tags:
+        - Provider
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: The provider with the specified ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Provider'
+        '404':
+          description: Provider not found
+    put:
+      summary: Update a provider by ID
+      tags:
+        - Provider
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Provider'
+      responses:
+        '200':
+          description: Provider updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Provider'
+        '404':
+          description: Provider not found
+    delete:
+      summary: Delete a provider by ID
+      tags:
+        - Provider
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Provider deleted successfully
+        '404':
+          description: Provider not found
+
+  /patient:
+    post:
+      summary: Create a new patient
+      tags:
+        - Patient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Patient'
+      responses:
+        '200':
+          description: Patient created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+    get:
+      summary: Get all patients
+      tags:
+        - Patient
+      responses:
+        '200':
+          description: A list of patients
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Patient'
+
+  /patient/search:
+    get:
+      summary: Search patients by first and last name
+      tags:
+        - Patient
+      parameters:
+        - name: firstName
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: lastName
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of matching patients
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Patient'
+
+  /patient/findByProvider:
+    get:
+      summary: Find patients by provider ID
+      tags:
+        - Patient
+      parameters:
+        - name: providerId
+          in: query
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: A list of patients for the provider
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Patient'
+
+  /patient/{id}:
+    get:
+      summary: Get a patient by ID
+      tags:
+        - Patient
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: The patient with the specified ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+        '404':
+          description: Patient not found
+    put:
+      summary: Update a patient by ID
+      tags:
+        - Patient
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Patient'
+      responses:
+        '200':
+          description: Patient updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+        '404':
+          description: Patient not found
+    delete:
+      summary: Delete a patient by ID
+      tags:
+        - Patient
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Patient deleted successfully
+        '404':
+          description: Patient not found
+
+  /medicalRecord/{id}:
+    post:
+      summary: Create a new medical record
+      tags:
+        - MedicalRecord
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MedicalRecord'
+      responses:
+        '200':
+          description: Medical record created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MedicalRecord'
+    get:
+      summary: Get a medical record by patient ID
+      tags:
+        - MedicalRecord
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: The medical record with the specified patient ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MedicalRecord'
+        '404':
+          description: Medical record not found
+    put:
+      summary: Update a medical record by patient ID
+      tags:
+        - MedicalRecord
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MedicalRecord'
+      responses:
+        '200':
+          description: Medical record updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MedicalRecord'
+        '404':
+          description: Medical record not found
+    delete:
+      summary: Delete a medical record by patient ID
+      tags:
+        - MedicalRecord
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Medical record deleted successfully
+        '404':
+          description: Medical record not found
+
+components:
+  schemas:
+    Provider:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Doe
+        dob:
+          type: object
+          example: 2004-12-12
+        email:
+          type: string
+          example: gmail@gmail.com
+        phone:
+          type: string
+          example: +0956543456
+        specialty:
+          type: string
+          example: Cardiology
+
+    Patient:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Doe
+        dob:
+          type: object
+          example: 2004-12-12
+        email:
+          type: string
+          example: gmail@gmail.com
+        phone:
+          type: string
+          example: +0956543456
+        providerId:
+          type: integer
+          example: 123
+
+    MedicalRecord:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        patientId:
+          type: integer
+          example: 1
+        medicalCode:
+          type: string
+          example: Diagnosis description
+        providerId:
+          type: integer
+          example: 123
+        notes:
+          type: string
+          example: notes
+

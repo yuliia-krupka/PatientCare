@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: pcare
+  datasource:
+    url: "jdbc:mysql://localhost:3306/pcare?allowMultiQueries=true"
+    username: root
+    password: root
+    driverClassName: "com.mysql.cj.jdbc.Driver"
