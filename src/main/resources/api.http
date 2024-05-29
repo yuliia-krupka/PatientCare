@@ -48,23 +48,27 @@ Content-Type: application/json
 }
 
 
-### POST med rec
+### CREATE med rec
+
 POST http://localhost:8080/medicalRecord
 Content-Type: application/json
 
 {
-  "patientId": 32,
-  "providerId": 28,
+  "patientId": 89,
+  "providerId": 102,
   "creationDate": "2024-05-27",
   "medicalCode": "AA1",
   "notes": "notesssss"
 }
 
-### GET All medRecord
+### GET medical record by id
 
-GET http://localhost:8080/medicalRecord/51
+GET http://localhost:8080/medicalRecord/58
 
+### GET MR by patient id
 
+GET http://localhost:8080/medicalRecord/patient/89
+Content-Type: application/json
 
 
 

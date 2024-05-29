@@ -99,5 +99,9 @@ public class MedicalRecordRepository {
     public Collection<MedicalRecord> findAll() {
         return this.jdbcTemplate.query("SELECT * FROM MedicalRecord", (rs, rowNum) -> new MedicalRecord(rs.getInt(1), rs.getInt(2), toLocalDate(rs.getDate(3)), rs.getString(4), rs.getInt(5), rs.getString(6)));
     }
+
+    public void delete(Integer id) {
+        this.jdbcTemplate.update("DELETE FROM MedicalRecord WHERE Id = ?", id);
+    }
 }
 

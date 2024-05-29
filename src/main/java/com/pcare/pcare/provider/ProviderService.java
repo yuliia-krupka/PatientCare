@@ -1,8 +1,7 @@
 package com.pcare.pcare.provider;
 
-import com.pcare.pcare.patient.Patient;
-import com.pcare.pcare.utils.NotFoundException;
 import com.pcare.pcare.utils.CrudService;
+import com.pcare.pcare.utils.NotFoundException;
 import com.pcare.pcare.utils.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

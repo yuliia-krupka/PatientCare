@@ -12,6 +12,9 @@ import java.util.Collection;
 import java.util.Optional;
 
 
+/**
+ * Bussinsess logic
+ */
 @Service
 public class MedicalRecordService implements CrudService<Integer, MedicalRecord> {
 
@@ -26,8 +29,8 @@ public class MedicalRecordService implements CrudService<Integer, MedicalRecord>
 
 
     @Override
-    public Optional<MedicalRecord> findById(Integer integer) {
-        return Optional.empty();
+    public Optional<MedicalRecord> findById(Integer id) {
+        return this.repository.findById(id);
     }
     public Collection<MedicalRecord> findByPatientId(Integer id) {
         checkIfExists(id);
@@ -59,6 +62,11 @@ public class MedicalRecordService implements CrudService<Integer, MedicalRecord>
     @Override
     public void delete(Integer id) {
         checkIfExists(id);
+        this.repository.delete(id);
+    }
+
+    public void deleteByPatient(Integer id) {
+        checkIfExists(id);
         this.repository.deleteByPatientId(id);
     }
 
@@ -83,7 +91,7 @@ public class MedicalRecordService implements CrudService<Integer, MedicalRecord>
 
     private void checkIfPatientExists(Integer id) {
         if (this.patientRepository.findById(id).isEmpty()) {
-            throw new NotFoundException("Medical record with id %d not found".formatted(id));
+            throw new NotFoundException("Patient with id %d not found".formatted(id));
         }
     }
 }
