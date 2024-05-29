@@ -264,7 +264,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/MedicalRecord'
     get:
-      summary: Get a medical record by patient ID
+      summary: Get a medical record by ID
       tags:
         - MedicalRecord
       parameters:
@@ -279,7 +279,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MedicalRecord'
+                type: array
+                items:
+                  $ref: '#/components/schemas/MedicalRecord'
         '404':
           description: Medical record not found
     put:
@@ -320,6 +322,27 @@ paths:
       responses:
         '204':
           description: Medical record deleted successfully
+        '404':
+          description: Medical record not found
+
+  /medicalRecord/pateint/{patientId}:
+    get:
+      summary: Get a medical record by Patient ID
+      tags:
+        - MedicalRecord
+      parameters:
+        - name: patientId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: The medical record with the specified Patient ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MedicalRecord'
         '404':
           description: Medical record not found
 
